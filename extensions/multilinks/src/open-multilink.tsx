@@ -1,4 +1,4 @@
-import { Form, ActionPanel, Action, showToast, Toast, Icon } from "@raycast/api";
+import { Form, ActionPanel, Action, showToast, Toast, Icon, popToRoot } from "@raycast/api";
 import { useRef } from "react";
 import { useBrowsers } from "./hooks/useBrowsers";
 import BrowserDropdown from "./Components/BrowserDropdown";
@@ -35,8 +35,8 @@ export default function OpenMultilink() {
         title: `Opened ${linksToOpen.length} link${linksToOpen.length > 1 ? "s" : ""}!`,
       });
 
-      // Clear the form after successful opening
       linksFieldRef.current?.reset();
+      await popToRoot();
     } catch (error) {
       await showToast({
         style: Toast.Style.Failure,
